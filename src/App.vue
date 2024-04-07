@@ -33,7 +33,20 @@ export default {
         { 
           firstName: "seyha", lastName: 'oeurn'
         }
-      ]
+      ],
+      actors: [
+        {
+          name: "christian Bale",
+          movies: ["Batman", "The Prestige"]
+        },{
+          name: 'Di Caprio',
+          movies: ['Titanic', 'Inception']
+        }
+      ],
+      myInfo: {
+        name: "seyha",
+        subject: "computer Science"
+      }
     };
   },
 };
@@ -71,6 +84,9 @@ export default {
   <!-- list rendering -->
   <h2 v-for="(name,index ) in names" :key="name">{{ index }} {{ name }} </h2>
   <h2 v-for="(name, index) in fullName" :key="name">{{ index }}  {{ name.firstName + name.lastName }} </h2>
+<div v-for="actor in actors" :key="actor.name">
+<h2>{{ actor.name }}, Movies: <span v-for="movie in actor.movies" :key="movie"> {{ movie }}</span></h2></div>
+<h2 v-for="(value, key, index) in myInfo" :key="value">{{ key }}  {{index}} My name is{{ value.name }}, my major {{value.subject}}</h2>
 </template>
 
 <style scoped></style>
