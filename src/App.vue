@@ -1,4 +1,5 @@
 <script>
+import _ from "lodash";
 export default {
   name: "App",
   data() {
@@ -10,48 +11,63 @@ export default {
       status: "danger",
       isPromoted: true,
       isSoldout: false,
-      highlightColor: 'orange',
+      highlightColor: "orange",
       headerSize: 90,
       objectStyle: {
         fontSize: "30px",
         color: "blue",
-        fontWeight: 700
+        fontWeight: 700,
       },
 
       objectStyles: {
-        "text-decoration": "underline"
+        "text-decoration": "underline",
       },
       // condition
       num: 0,
       vShow: false,
       // list rendering
-      names: ['Seyha', "Nona", "Linda"],
+      names: ["Seyha", "Nona", "Linda"],
       fullName: [
-        { 
-          firstName: "bruce", lastName: 'Wayne'
+        {
+          firstName: "bruce",
+          lastName: "Wayne",
         },
-        { 
-          firstName: "seyha", lastName: 'oeurn'
-        }
+        {
+          firstName: "seyha",
+          lastName: "oeurn",
+        },
       ],
       actors: [
         {
           name: "christian Bale",
-          movies: ["Batman", "The Prestige"]
-        },{
-          name: 'Di Caprio',
-          movies: ['Titanic', 'Inception']
-        }
+          movies: ["Batman", "The Prestige"],
+        },
+        {
+          name: "Di Caprio",
+          movies: ["Titanic", "Inception"],
+        },
       ],
       myInfo: {
         name: "seyha",
-        subject: "computer Science"
-      }
+        subject: "computer Science",
+      },
     };
   },
+
+  // methods: {
+  //   shuffle() {
+  //     console.log(this.names);
+  //     this.names = _.shuffle(this.names);
+  //   },
+  // },
+
+  methods: {
+    shuffle() {
+      console.log(this.names);
+      this.names = _.shuffle(this.names);
+    },
+  },
 };
-
-
 </script>
 
 <template>
@@ -70,23 +86,45 @@ export default {
   <h2 v-bind:class="{ promoted: isPromoted, new: !isSoldout }">
     Object conditional movie
   </h2>
-  <h2 v-bind:style="{color: highlightColor}" > Inline style </h2>
+  <h2 v-bind:style="{ color: highlightColor }">Inline style</h2>
   <h2 v-bind:style="objectStyle">Object style</h2>
-  <h2 :style=" [objectStyle, objectStyles]"> Objects Style</h2>
+  <h2 :style="[objectStyle, objectStyles]">Objects Style</h2>
   <!-- condition Rendering -->
 
-  <h2 v-if="num === 0">  The number is Zero</h2>
+  <h2 v-if="num === 0">The number is Zero</h2>
   <h2 v-else-if="num < 0">The number is negative</h2>
   <h2 v-else-if="num > 0">The number is positive</h2>
-  <h2 v-else="num === 0">  The number Not Zero {{ num }}</h2>
-  <h2 v-show="vShow"> V-Show</h2>
+  <h2 v-else="num === 0">The number Not Zero {{ num }}</h2>
+  <h2 v-show="vShow">V-Show</h2>
 
   <!-- list rendering -->
-  <h2 v-for="(name,index ) in names" :key="name">{{ index }} {{ name }} </h2>
-  <h2 v-for="(name, index) in fullName" :key="name">{{ index }}  {{ name.firstName + name.lastName }} </h2>
-<div v-for="actor in actors" :key="actor.name">
-<h2>{{ actor.name }}, Movies: <span v-for="movie in actor.movies" :key="movie"> {{ movie }}</span></h2></div>
-<h2 v-for="(value, key, index) in myInfo" :key="value">{{ key }}  {{index}} My name is{{ value.name }}, my major {{value.subject}}</h2>
+  <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
+  <h2 v-for="(name, index) in fullName" :key="name">
+    {{ index }} {{ name.firstName + name.lastName }}
+  </h2>
+  <div v-for="actor in actors" :key="actor.name">
+    <h2>
+      {{ actor.name }}, Movies:
+      <span v-for="movie in actor.movies" :key="movie"> {{ movie }}</span>
+    </h2>
+  </div>
+  <h2 v-for="(value, key, index) in myInfo" :key="value">
+    {{ key }} {{ index }} My name is{{ value.name }}, my major
+    {{ value.subject }}
+  </h2>
+
+  <template v-for="name in names">
+    <h2>{{ name }}</h2>
+    <input placeholder="Last name" />
+    <hr />
+  </template>
+  <button @click="shuffle">Shuffle!</button>
+
+  <template v-for="name in names" :key="name">
+    <h2 v-if="name === 'Seyha'">
+      {{ name }}
+    </h2></template
+  >
 </template>
 
 <style scoped></style>
